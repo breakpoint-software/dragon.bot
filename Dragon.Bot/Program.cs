@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddBinance(options =>
 {
     // Options can be configured here, for example:
-    options.ApiCredentials = new ApiCredentials("XsCQcHF7tByImp4yKq6SCSvimYikdkdNtYtETKzAyhd8by8jHl0mslxYnkNlk4v3", "dz70WyYj903l6FzP00GTRyyia3MtNvEcUDvaq7AYGjnYRhpNI6X5d9CzRMm8pezz");
+    options.ApiCredentials = new ApiCredentials(builder.Configuration.GetSection("Binance:ApiKey").Value ?? "", builder.Configuration.GetSection("Binance:Secret").Value ?? "");
     options.Environment = BinanceEnvironment.Testnet;
 });
 
