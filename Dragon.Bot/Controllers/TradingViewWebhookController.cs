@@ -18,14 +18,15 @@ namespace Dragon.Bot.Controllers
             _logger = logger;
         }
 
-        [HttpPost(Name = "Receive")]
-        public async Task Receive(DragonSignal signal)
+        [HttpPost]
+        [Route("process")]
+        public async Task<BinancePlacedOrder> Receive(DragonSignal signal)
         {
 
             var restClient = new BinanceRestClient();
 
             var tickerResult = await restClient.SpotApi.Trading.PlaceOrderAsync(
-                "BTCUSDT",
+                symbol: signal.Ticker,
                 side: signal.Side == "buy" ? Binance.Net.Enums.OrderSide.Buy : Binance.Net.Enums.OrderSide.Sell,
                 type: Binance.Net.Enums.SpotOrderType.Limit,
                 quantity: Convert.ToDecimal(signal.Qty),
@@ -34,6 +35,8 @@ namespace Dragon.Bot.Controllers
                 );
 
             await SaveLog(tickerResult, signal);
+
+            return tickerResult.Data;
         }
 
         private async Task SaveLog(WebCallResult<BinancePlacedOrder> result, DragonSignal signal)
@@ -64,20 +67,21 @@ namespace Dragon.Bot.Controllers
 
             await db.Collection("signals").AddAsync(signal);
         }
-
-        [FirestoreData]
-        private class OrderPlaced
-        {
-            [FirestoreProperty()]
-            public double Price { get; internal set; }
-            [FirestoreProperty()]
-            public double Quantity { get; internal set; }
-            [FirestoreProperty]
-            public string OrderId { get; internal set; }
-            [FirestoreProperty]
-            public DateTime CreatedDate { get; internal set; }
-        }
     }
+
+    [FirestoreData]
+    public class OrderPlaced
+    {
+        [FirestoreProperty()]
+        public double Price { get; internal set; }
+        [FirestoreProperty()]
+        public double Quantity { get; internal set; }
+        [FirestoreProperty]
+        public string OrderId { get; internal set; }
+        [FirestoreProperty]
+        public DateTime CreatedDate { get; internal set; }
+    }
+
     [FirestoreData]
     public class DragonSignal
 

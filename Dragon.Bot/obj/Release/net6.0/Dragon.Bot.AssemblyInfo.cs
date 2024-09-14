@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dragon.Bot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b28d9018f701c64222ad945209b1ce86a0da171e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dragon.Bot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dragon.Bot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

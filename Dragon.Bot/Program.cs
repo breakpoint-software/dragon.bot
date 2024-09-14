@@ -13,9 +13,8 @@ builder.Services.AddBinance(options =>
 {
     // Options can be configured here, for example:
     options.ApiCredentials = new ApiCredentials(builder.Configuration.GetSection("Binance:ApiKey").Value ?? "", builder.Configuration.GetSection("Binance:Secret").Value ?? "");
-    options.Environment = BinanceEnvironment.Testnet;
+    options.Environment = builder.Environment.IsDevelopment() ? BinanceEnvironment.Testnet : BinanceEnvironment.Live;
 });
-
 
 var app = builder.Build();
 
