@@ -19,7 +19,56 @@ namespace Models.Domain
         [Column(TypeName = "decimal(16, 2)")]
         public decimal UsdAmount { get; set; }
         public DateTime CreatedDate { get; set; }
+        public long BinanceOrderId { get; set; }
+        public string SignalOrderId { get; set; }
     }
 
-    public enum OrderPosition { Short, Long }
+    public enum OrderPosition
+    {
+        Sell,
+        Buy
+    }
+    public enum OrderStatus
+    {
+        /// <summary>
+        /// Order is new
+        /// </summary>
+        New,
+        /// <summary>
+        /// Order is partly filled, still has quantity left to fill
+        /// </summary>
+        PartiallyFilled,
+        /// <summary>
+        /// The order has been filled and completed
+        /// </summary>
+        Filled,
+        /// <summary>
+        /// The order has been canceled
+        /// </summary>
+        Canceled,
+        /// <summary>
+        /// The order is in the process of being canceled  (currently unused)
+        /// </summary>
+        PendingCancel,
+        /// <summary>
+        /// The order has been rejected
+        /// </summary>
+        Rejected,
+        /// <summary>
+        /// The order has expired
+        /// </summary>
+        Expired,
+        /// <summary>
+        /// Liquidation with Insurance Fund
+        /// </summary>
+        Insurance,
+        /// <summary>
+        /// Counterparty Liquidation
+        /// </summary>
+        Adl,
+        /// <summary>
+        /// Expired because of trigger SelfTradePrevention
+        /// </summary>
+        ExpiredInMatch
+    }
 }

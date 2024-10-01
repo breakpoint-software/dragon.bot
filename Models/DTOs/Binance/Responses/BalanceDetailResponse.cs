@@ -1,4 +1,4 @@
-﻿namespace Models.DTOs.Responses
+﻿namespace Models.DTOs.Binance.Responses
 {
     public class BalanceDetailResponse
     {
