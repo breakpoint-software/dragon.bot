@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Models.Domain;
-using Models.DTOs.Responses;
+using Models.DTOs.Binance.Responses;
 
 namespace Dragon.Bot.Controllers
 {
@@ -36,7 +36,7 @@ namespace Dragon.Bot.Controllers
 
             var restClient = new BinanceRestClient();
 
-            return Ok(new { TradeBalance = await context.Orders.SumAsync(e => e.Position == Models.Domain.OrderPosition.Long ? -1 * e.UsdAmount : e.UsdAmount) });
+            return Ok(new { TradeBalance = await context.Orders.SumAsync(e => e.Position == Models.Domain.OrderPosition.Buy ? -1 * e.UsdAmount : e.UsdAmount) });
         }
 
         [HttpGet("tradebalancedetailed/{pair}")]
@@ -48,14 +48,14 @@ namespace Dragon.Bot.Controllers
 
             return Ok(context.Orders.ToList().Select(i =>
             {
-                currentTotal += i.Position == Models.Domain.OrderPosition.Long ? -1 * i.UsdAmount : i.UsdAmount;
+                currentTotal += i.Position == Models.Domain.OrderPosition.Buy ? -1 * i.UsdAmount : i.UsdAmount;
                 return new BalanceDetailResponse
                 {
                     OrderId = i.Id,
-                    Position = i.Position == Models.Domain.OrderPosition.Long ? "buy" : "sell",
+                    Position = i.Position == Models.Domain.OrderPosition.Buy ? "buy" : "sell",
                     Quantity = i.Quantity,
                     Price = i.Price,
-                    UsdAmount = i.Position == OrderPosition.Long ? -1 * i.UsdAmount : i.UsdAmount,
+                    UsdAmount = i.Position == OrderPosition.Buy ? -1 * i.UsdAmount : i.UsdAmount,
                     AccountBalance = currentTotal
                 };
             }).ToList());

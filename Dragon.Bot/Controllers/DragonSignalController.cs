@@ -1,7 +1,6 @@
 using DragonBot.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Models.Domain;
-using Models.DTOs.Requests;
+using Models.DTOs.Binance.Requests;
 
 namespace Dragon.Bot.Controllers
 {
@@ -19,22 +18,36 @@ namespace Dragon.Bot.Controllers
             this.signalHandler = signalHandler;
         }
 
+
+        //[HttpGet]
+        //[Route("process-simple-signal")]
+        //[ServiceFilter(typeof(IpBlockingMiddleware))]
+        //public async Task<IActionResult> ProcessSimpleSignal([FromQuery] string action, [FromQuery] decimal quantity)
+        //{
+        //    return await Process(new DragonSignalRequest
+        //    {
+        //        OrderId = "simply-action",
+        //        Price = 0,
+        //        Qty = quantity,
+        //        Side = action,
+        //        Ticker = "BTCUSDT"
+
+        //    });
+        //}
+
         [HttpPost]
         [Route("process")]
         [ServiceFilter(typeof(IpBlockingMiddleware))]
         public async Task<IActionResult> Process(DragonSignalRequest signal)
         {
-            Order order = null;
             try
             {
-                order = await signalHandler.HandleSignalAsync(signal);
+                return Ok(await signalHandler.HandleSignalAsync(signal));
             }
             catch (Exception ex)
             {
-                BadRequest(ex);
+                return BadRequest(ex.Message);
             }
-
-            return Ok(order);
         }
 
     }

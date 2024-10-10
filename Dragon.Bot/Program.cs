@@ -2,6 +2,7 @@ using Binance.Net;
 using CryptoExchange.Net.Authentication;
 using Dragon.Bot;
 using DragonBot.Services.Interfaces;
+using DragonBot.Services.Profiles;
 using DragonBot.Services.Services;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IpBlockingMiddleware>();
+builder.Services.AddAutoMapper(typeof(OrderProfile));
 
 
 builder.Services.AddBinance(options =>
@@ -33,6 +35,7 @@ builder.Services.AddDbContext<DragonBotDbContext>(options =>
 });
 
 builder.Services.AddScoped<ISignalHandlerService, BinanceSignalHandlerService>();
+builder.Services.AddScoped<IAssetProvider, BinanceProvider>();
 
 
 
