@@ -8,6 +8,7 @@ namespace Models
     public class DragonBotDbContext : DbContext
     {
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Bot> Bots { get; set; }
 
         public DragonBotDbContext()
         {

@@ -17,7 +17,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IpBlockingMiddleware>();
+builder.Services.AddScoped<ClientIpCheckActionFilter>(container =>
+{
+    var loggerFactory = container.GetRequiredService<ILoggerFactory>();
+    var logger = loggerFactory.CreateLogger<ClientIpCheckActionFilter>();
+
+    return new ClientIpCheckActionFilter(builder.Configuration["AdminSafeList"]);
+});
+
+//builder.Services.AddScoped<IpBlockingMiddleware>();
 builder.Services.AddAutoMapper(typeof(OrderProfile));
 
 
@@ -36,8 +44,6 @@ builder.Services.AddDbContext<DragonBotDbContext>(options =>
 
 builder.Services.AddScoped<ISignalHandlerService, BinanceSignalHandlerService>();
 builder.Services.AddScoped<IAssetProvider, BinanceProvider>();
-
-
 
 var app = builder.Build();
 

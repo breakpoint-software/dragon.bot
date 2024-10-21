@@ -7,6 +7,6 @@
         public decimal Price { get; set; }
         public decimal Qty { get; set; }
         public string Side { get; set; }
-        public string OrderId { get; set; }
+        public required string BotShortName { get; set; }
     }
 }

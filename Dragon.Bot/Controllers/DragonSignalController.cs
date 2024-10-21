@@ -37,7 +37,7 @@ namespace Dragon.Bot.Controllers
 
         [HttpPost]
         [Route("process")]
-        [ServiceFilter(typeof(IpBlockingMiddleware))]
+        //[ServiceFilter(typeof(ClientIpCheckActionFilter))]
         public async Task<IActionResult> Process(DragonSignalRequest signal)
         {
             try

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{2066578A-363E-46B9-8CB3-44C7AC5AF35F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakpoint.Common", "Breakpoint.Common\Breakpoint.Common.csproj", "{794D2D10-F604-46BD-A451-5C141A2F0A92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{2066578A-363E-46B9-8CB3-44C7AC5AF35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2066578A-363E-46B9-8CB3-44C7AC5AF35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2066578A-363E-46B9-8CB3-44C7AC5AF35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{794D2D10-F604-46BD-A451-5C141A2F0A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794D2D10-F604-46BD-A451-5C141A2F0A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794D2D10-F604-46BD-A451-5C141A2F0A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794D2D10-F604-46BD-A451-5C141A2F0A92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
